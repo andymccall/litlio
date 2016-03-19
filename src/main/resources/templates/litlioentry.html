@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Litl.io - Show Entry</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>Show Litl.io Entry</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">LitlioEntry Id :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${litlioEntry.id}">LitlioEntry Id</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Short URL :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">
+                            <a th:text="${litlioEntry.ShortURL}" th:href="@{${litlioEntry.ShortURL}}">ShortURL</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Long URL :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static">
+                            <a th:text="${litlioEntry.LongURL}" th:href="@{${litlioEntry.LongURL}}">LongURL</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 sm-2 control-label">Hit Count :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${litlioEntry.HitCount}">Hit Count</p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
