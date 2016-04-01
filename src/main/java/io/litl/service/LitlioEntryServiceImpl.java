@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
 
 /**
  * Created by andym on 10/03/2016.
@@ -22,8 +23,26 @@ public class LitlioEntryServiceImpl implements LitlioEntryService {
     }
 
     @Override
-    public void addLitlioEntry(LitlioEntry litlioEntry) {
+    public LitlioEntry addLitlioEntry(LitlioEntry litlioEntry) {
+        if (litlioEntry != null) {
+            litlioEntry.setId(getNextKey());
+            litlioEntry.setHitCount(0);
 
+            System.out.println(litlioEntry.toString());
+
+            litlioEntries.put(litlioEntry.getId(), litlioEntry);
+
+            return litlioEntry;
+
+        } else {
+            throw new RuntimeException("litlioEntry cannot be null!");
+        }
+
+    }
+
+    // Return the next key in the hashmap
+    private Integer getNextKey(){
+        return Collections.max(litlioEntries.keySet()) + 1;
     }
 
     @Override

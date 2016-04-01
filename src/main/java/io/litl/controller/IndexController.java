@@ -26,13 +26,13 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping("/{shortURL}")
-    public String getLitlioEntry(@PathVariable String shortURL, Model model) {
-
-        LitlioEntry litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
-
-        return "redirect:" + litlioEntry.getLongURL();
-
-    }
+//    @RequestMapping("/{shortURL}")
+//    public String getLitlioEntry(@PathVariable String shortURL, Model model) {
+//
+//        LitlioEntry litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
+//
+//        return "redirect:" + litlioEntry.getLongURL();
+//
+//    }
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface LitlioEntryService {
 
-    public void addLitlioEntry(LitlioEntry litlioEntry);
+    public LitlioEntry addLitlioEntry(LitlioEntry litlioEntry);
     public LitlioEntry getLitlioEntryByID(int id);
     public LitlioEntry getLitlioEntryByShortURL(String shortURL);
     public List<LitlioEntry> listLitlioEntries();
