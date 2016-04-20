@@ -22,17 +22,18 @@ public class IndexController {
     }
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("litlioEntry", new LitlioEntry());
         return "index";
     }
 
-//    @RequestMapping("/{shortURL}")
-//    public String getLitlioEntry(@PathVariable String shortURL, Model model) {
-//
-//        LitlioEntry litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
-//
-//        return "redirect:" + litlioEntry.getLongURL();
-//
-//    }
+    @RequestMapping("/{shortURL}")
+    public String getLitlioEntry(@PathVariable String shortURL, Model model) {
+
+        LitlioEntry litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
+
+        return "redirect:" + litlioEntry.getLongURL();
+
+    }
 
 }

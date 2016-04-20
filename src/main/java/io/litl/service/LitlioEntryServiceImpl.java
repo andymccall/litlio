@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Collections;
+import java.security.SecureRandom;
+import java.math.BigInteger;
 
 /**
  * Created by andym on 10/03/2016.
@@ -18,6 +20,7 @@ public class LitlioEntryServiceImpl implements LitlioEntryService {
     private Map<Integer,LitlioEntry> litlioEntries;
 
     public LitlioEntryServiceImpl() {
+
         loadLitlioEntries();
 
     }
@@ -27,6 +30,7 @@ public class LitlioEntryServiceImpl implements LitlioEntryService {
         if (litlioEntry != null) {
             litlioEntry.setId(getNextKey());
             litlioEntry.setHitCount(0);
+            litlioEntry.setShortURL(createShortURL());
 
             System.out.println(litlioEntry.toString());
 
@@ -41,8 +45,20 @@ public class LitlioEntryServiceImpl implements LitlioEntryService {
     }
 
     // Return the next key in the hashmap
-    private Integer getNextKey(){
+    private Integer getNextKey() {
         return Collections.max(litlioEntries.keySet()) + 1;
+    }
+
+    private String createShortURL() {
+        String characterSet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        SecureRandom rnd = new SecureRandom();
+        StringBuilder shortURL = new StringBuilder(6);
+
+        for( int i = 0; i < 6; i++ ) {
+            shortURL.append(characterSet.charAt(rnd.nextInt(characterSet.length())));
+        }
+
+        return shortURL.toString();
     }
 
     @Override
