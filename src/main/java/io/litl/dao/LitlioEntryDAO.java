@@ -10,7 +10,8 @@ import java.util.List;
 public interface LitlioEntryDAO {
 
     public void addLitlioEntry(LitlioEntry litlioEntry);
-    public LitlioEntry getLitloEntryByID(int id);
+    public LitlioEntry getLitlioEntryByID(int id);
+    public LitlioEntry getLitlioEntryByShortURL(String shortURL);
     public List<LitlioEntry> listLitlioEntries();
 
 }

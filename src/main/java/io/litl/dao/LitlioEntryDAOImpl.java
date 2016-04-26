@@ -1,6 +1,8 @@
 package io.litl.dao;
 
 import io.litl.model.LitlioEntry;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,21 +10,29 @@ import java.util.List;
 /**
  * Created by andym on 10/03/2016.
  */
-@Repository
+@Repository("litlioEntryDao")
 public class LitlioEntryDAOImpl extends AbstractDAO implements LitlioEntryDAO {
 
-    @Override
     public void addLitlioEntry(LitlioEntry litlioEntry) {
-
+        persist(litlioEntry);
     }
 
-    @Override
-    public LitlioEntry getLitloEntryByID(int id) {
-        return null;
+    public LitlioEntry getLitlioEntryByID(int id) {
+        Criteria criteria = getSession().createCriteria(LitlioEntry.class);
+        criteria.add(Restrictions.eq("id",id));
+        return (LitlioEntry) criteria.uniqueResult();
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
     public List<LitlioEntry> listLitlioEntries() {
-        return null;
+        Criteria criteria = getSession().createCriteria(LitlioEntry.class);
+        return (List<LitlioEntry>) criteria.list();
     }
+
+    public LitlioEntry getLitlioEntryByShortURL(String shortURL) {
+        Criteria criteria = getSession().createCriteria(LitlioEntry.class);
+        criteria.add(Restrictions.eq("shortURL",shortURL));
+        return (LitlioEntry) criteria.uniqueResult();    }
+
+
 }

@@ -1,13 +1,30 @@
 package io.litl.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+
 /**
  * Created by andym on 10/03/2016.
  */
+@Entity
+@Table(name = "litlioentries")
 public class LitlioEntry {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "shortURL")
     private String shortURL;
+
+    @Column(name = "longURL")
     private String longURL;
+
+    @Column(name = "hitCount")
     private int hitCount;
 
     public int getId() {

@@ -1,11 +1,14 @@
 package io.litl.dao;
 
-/**
- * Created by andym on 10/03/2016.
- */
-public class AbstractDAO {
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
-    /*
+/**
+ * Created by andymccall on 22/04/2016.
+ */
+public abstract class AbstractDAO {
+
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -20,6 +23,5 @@ public class AbstractDAO {
     public void delete(Object entity) {
         getSession().delete(entity);
     }
-    */
 
 }
