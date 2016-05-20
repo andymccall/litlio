@@ -1,7 +1,10 @@
 package io.litl.dao;
 
+import io.litl.model.LitlioEntry;
+import io.litl.model.LitlioLogEntry;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,9 +19,13 @@ public abstract class AbstractDAO {
         return sessionFactory.getCurrentSession();
     }
 
-    public void persist(Object entity) {
+    public void persist(LitlioEntry entity) {
         getSession().persist(entity);
     }
+    public void persist(LitlioLogEntry entity) {
+        getSession().persist(entity);
+    }
+
 
     public void delete(Object entity) {
         getSession().delete(entity);
