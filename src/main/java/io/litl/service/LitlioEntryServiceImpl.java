@@ -28,7 +28,6 @@ public class LitlioEntryServiceImpl implements LitlioEntryService {
     @Transactional
     public LitlioEntry addLitlioEntry(LitlioEntry litlioEntry) {
         if (litlioEntry != null) {
-            litlioEntry.setHitCount(0);
             litlioEntry.setShortURL(createShortURL());
 
             litlioEntryDAO.addLitlioEntry(litlioEntry);

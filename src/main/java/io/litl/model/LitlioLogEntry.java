@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by andymccall on 19/05/2016.
  */
 @Entity
-@Table(name = "litliologs")
+@Table(name = "litliologentries")
 public class LitlioLogEntry {
 
     @Id
@@ -18,11 +18,17 @@ public class LitlioLogEntry {
     @Column(name = "litlioEntryID")
     private int litlioEntryId;
 
-    @Column(name = "date")
-    private Date dateTime;
+    @Column(name = "timeStamp")
+    private String timeStamp;
 
     @Column(name = "ipAddress")
-    private long ipAddress;
+    private String ipAddress;
+
+    @Column(name = "userAgent")
+    private String userAgent;
+
+    @Column(name = "referer")
+    private String referer;
 
     public int getId() {
         return id;
@@ -38,17 +44,30 @@ public class LitlioLogEntry {
         this.litlioEntryId = litlioEntryId;
     }
 
-    public Date getDateTime() {
-        return dateTime;
-    }
-    public void setDateTime(Date dateTime) {
-        this.dateTime = dateTime;
+    public String getTimestamp() { return timeStamp;}
+    public void setTimestamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
-    public long getIpAddress() {
+    public String getIpAddress() {
         return ipAddress;
     }
-    public void setIpAddress(long ipAddress) {
+    public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public String getUserAgent() {return userAgent;}
+    public void setUserAgent(String userAgent) { this.userAgent = userAgent;}
+
+    public String getReferer() {return referer;}
+    public void setReferer(String referer) { this.referer = referer;}
+
+    public String toString() {
+        return getId() + ","
+                + getLitlioEntryId() + ","
+                + getTimestamp() + ","
+                + getIpAddress() + ","
+                + getUserAgent() + ","
+                + getReferer();
     }
 }

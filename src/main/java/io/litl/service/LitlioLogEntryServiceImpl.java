@@ -3,6 +3,7 @@ package io.litl.service;
 import io.litl.dao.LitlioLogEntryDAO;
 import io.litl.model.LitlioLogEntry;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 /**
  * Created by andymccall on 20/05/2016.
  */
+@Service("litlioLogEntryService")
+@Transactional
 public class LitlioLogEntryServiceImpl implements LitlioLogEntryService {
 
     @Autowired
@@ -21,7 +24,16 @@ public class LitlioLogEntryServiceImpl implements LitlioLogEntryService {
     }
 
     @Override
+    @Transactional
     public void addLitlioLogEntry(LitlioLogEntry litlioLogEntry) {
+        if (litlioLogEntry != null) {
+
+            litlioLogEntryDAO.addLitlioLogEntry(litlioLogEntry);
+
+        } else {
+            throw new RuntimeException("litlioLogEntry cannot be null!");
+        }
+
 
     }
 

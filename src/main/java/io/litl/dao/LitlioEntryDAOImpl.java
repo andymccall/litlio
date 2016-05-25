@@ -38,10 +38,6 @@ public class LitlioEntryDAOImpl extends AbstractDAO implements LitlioEntryDAO {
         criteria.add(Restrictions.eq("shortURL",shortURL));
         litlioEntry = (LitlioEntry) criteria.uniqueResult();
 
-        // Increment the hitcounter and save before returning
-        litlioEntry.incrementHitCount();
-        persist(litlioEntry);
-
         return litlioEntry;
     }
 

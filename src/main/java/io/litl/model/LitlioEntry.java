@@ -24,9 +24,6 @@ public class LitlioEntry {
     @Column(name = "longURL")
     private String longURL;
 
-    @Column(name = "hitCount")
-    private int hitCount;
-
     public int getId() {
         return id;
     }
@@ -51,25 +48,11 @@ public class LitlioEntry {
         this.longURL = longURL;
     }
 
-    public int getHitCount() {
-        return hitCount;
-    }
-
-    public void setHitCount(int hitCount) {
-        this.hitCount = hitCount;
-    }
-
-    public void incrementHitCount() {
-        this.hitCount++;
-    }
-
     @Override
     public String toString() {
-        return "LitlioEntry{" +
-                "id=" + id +
-                ", shortURL='" + shortURL + '\'' +
-                ", longURL='" + longURL + '\'' +
-                ", hitCount=" + hitCount +
-                '}';
+        return getId() + ","
+                + getShortURL() + ","
+                + getLongURL();
+
     }
 }
