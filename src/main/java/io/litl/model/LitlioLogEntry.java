@@ -62,6 +62,7 @@ public class LitlioLogEntry {
     public String getReferer() {return referer;}
     public void setReferer(String referer) { this.referer = referer;}
 
+
     public String toString() {
         return getId() + ","
                 + getLitlioEntryId() + ","

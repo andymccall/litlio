@@ -10,6 +10,6 @@ public interface LitlioLogEntryService {
 
     public void addLitlioLogEntry(LitlioLogEntry litlioLogEntry);
     public LitlioLogEntry getLitlioLogEntryByID(int id);
-    public List<LitlioLogEntry> listLitlioLogEntries(int litlioEntryId);
+    public List<LitlioLogEntry> listLitlioLogEntriesByID(int litlioEntryId);
 
 }

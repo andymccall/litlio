@@ -25,8 +25,9 @@ public class LitlioLogEntryDAOImpl extends AbstractDAO implements LitlioLogEntry
     }
 
     @SuppressWarnings("unchecked")
-    public List<LitlioLogEntry> listLitlioLogEntries(int litlioEntryId) {
+    public List<LitlioLogEntry> listLitlioLogEntriesByID(int litlioEntryId) {
         Criteria criteria = getSession().createCriteria(LitlioLogEntry.class);
+        criteria.add(Restrictions.eq("litlioEntryId",litlioEntryId));
         return (List<LitlioLogEntry>) criteria.list();
     }
 

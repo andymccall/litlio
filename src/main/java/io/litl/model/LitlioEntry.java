@@ -1,10 +1,6 @@
 package io.litl.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
 /**
  * Created by andym on 10/03/2016.
@@ -23,6 +19,9 @@ public class LitlioEntry {
 
     @Column(name = "longURL")
     private String longURL;
+
+    @Transient
+    private int hitCount;
 
     public int getId() {
         return id;
@@ -47,6 +46,10 @@ public class LitlioEntry {
     public void setLongURL(String longURL) {
         this.longURL = longURL;
     }
+
+    public void setHitCount(int hitCount) { this.hitCount = hitCount;}
+
+    public int getHitCount() { return hitCount;}
 
     @Override
     public String toString() {

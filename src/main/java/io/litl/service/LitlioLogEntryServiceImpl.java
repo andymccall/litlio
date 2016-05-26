@@ -43,9 +43,9 @@ public class LitlioLogEntryServiceImpl implements LitlioLogEntryService {
 
     @Override
     @Transactional
-    public List<LitlioLogEntry> listLitlioLogEntries(int litlioEntryId) {
+    public List<LitlioLogEntry> listLitlioLogEntriesByID(int litlioEntryId) {
 
-        return litlioLogEntryDAO.listLitlioLogEntries(litlioEntryId);
+        return litlioLogEntryDAO.listLitlioLogEntriesByID(litlioEntryId);
 
     }
 }
