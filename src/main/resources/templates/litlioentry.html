@@ -17,7 +17,7 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <h2>Show Litl.io Entry</h2>
+            <h2>Litl.io Entry</h2>
         </div>
     </div>
     <div class="row">
@@ -33,7 +33,7 @@
                     <label class="col-sm-2 control-label">Short URL :</label>
                     <div class="col-sm-10">
                         <p class="form-control-static">
-                            <a th:text="${litlioEntry.ShortURL}" th:href="@{~/} + @{${litlioEntry.ShortURL}}">ShortURL</a>
+                            <a th:text="'http://litl.io/' + ${litlioEntry.ShortURL}" th:href="@{~/} + @{${litlioEntry.ShortURL}}">ShortURL</a>
                         </p>
                     </div>
                 </div>
@@ -51,6 +51,26 @@
                         <p class="form-control-static" th:text="${litlioEntry.HitCount}">Hit Count</p>
                     </div>
                 </div>
+                <div class="container">
+                    <div th:if="${not #lists.isEmpty(litlioLogEntries)}">
+                        <h2>Logs</h2>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Time</th>
+                                <th>IP Address</th>
+                                <th>UserAgent</th>
+                                <th>Referer</th>
+                            </tr>
+                            <tr th:each="litlioLogEntry : ${litlioLogEntries}">
+                                <td th:text="${litlioLogEntry.Timestamp}"></td>
+                                <td th:text="${litlioLogEntry.ipAddress}"></td>
+                                <td th:text="${litlioLogEntry.userAgent}"></td>
+                                <td th:text="${litlioLogEntry.referer}"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
             </form>
         </div>
     </div>

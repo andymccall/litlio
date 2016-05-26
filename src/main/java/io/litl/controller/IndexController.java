@@ -51,7 +51,7 @@ public class IndexController {
 
         LitlioLogEntry litlioLogEntry = new LitlioLogEntry();
         litlioLogEntry.setLitlioEntryId(litlioEntry.getId());
-        litlioLogEntry.setIpAddress(request.getRemoteAddr());
+        litlioLogEntry.setIpAddress(request.getHeader("X-Forwarded-For"));
         litlioLogEntry.setUserAgent(request.getHeader("user-agent"));
         litlioLogEntry.setReferer(request.getHeader("referer"));
         litlioLogEntry.setTimestamp(timeStamp);
