@@ -34,42 +34,46 @@ public class LitlioController {
         this.litlioLogEntryService = litlioLogEntryService;
     }
 
-    @RequestMapping("/entry/{id}")
-    public String getLitlioEntry(@PathVariable Integer id, Model model) {
+    @RequestMapping({"/view/{shortURL]", "/v/{shortURL}"})
+    public String getLitlioEntry(@PathVariable String shortURL, Model model) {
 
         LitlioEntry litlioEntry;
-        litlioEntry = litlioEntryService.getLitlioEntryByID(id);
-        System.out.println("Litlio: " + litlioEntry.toString());
+        litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
 
         List<LitlioLogEntry> litlioLogEntries;
-        System.out.println("Getting logs for ID: " + litlioEntry.getId());
         litlioLogEntries = litlioLogEntryService.listLitlioLogEntriesByID(litlioEntry.getId());
-        System.out.println("LitlioEntries: " + litlioLogEntries.toString());
 
         litlioEntry.setHitCount(litlioLogEntries.size());
-        System.out.println("Size: " + litlioLogEntries.size());
 
         model.addAttribute("litlioEntry", litlioEntry);
         model.addAttribute("litlioLogEntries", litlioLogEntries);
 
-        return "litlioEntry";
+        return "view";
     }
 
-    @RequestMapping("/entry/new")
-    public String newLitlioEntry(Model model) {
+    @RequestMapping("/id/{id}")
+    public String getLitlioEntry(@PathVariable Integer id, Model model) {
 
-        model.addAttribute("litlioEntry", new LitlioEntry());
+        LitlioEntry litlioEntry;
+        litlioEntry = litlioEntryService.getLitlioEntryByID(id);
 
-        return "litlioEntryForm";
+        List<LitlioLogEntry> litlioLogEntries;
+        litlioLogEntries = litlioLogEntryService.listLitlioLogEntriesByID(litlioEntry.getId());
+
+        litlioEntry.setHitCount(litlioLogEntries.size());
+
+        model.addAttribute("litlioEntry", litlioEntry);
+        model.addAttribute("litlioLogEntries", litlioLogEntries);
+
+        return "view";
     }
 
-    @RequestMapping(value = "/entry", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createLitlioEntry(LitlioEntry litlioEntry) {
 
-        System.out.println(litlioEntry.toString());
-
         LitlioEntry savedLitlioEntry = litlioEntryService.addLitlioEntry(litlioEntry);
-        return "redirect:/entry/" + savedLitlioEntry.getId();
+        return "redirect:/v/" + savedLitlioEntry.getShortURL();
 
     }
 }

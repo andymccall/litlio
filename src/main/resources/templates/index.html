@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>litl.io - Create Entry</title>
+    <title>litl.io</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="shortcut icon" href="/templates/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="/templates/favicon.ico" type="image/x-icon"/>
 
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
@@ -11,32 +14,66 @@
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
 
+
 </head>
 <body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand" href="#">Litl.io</a>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Login</a></li>
+            </ul>
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="span4"></div>
+        <div class="span4"><img class="center-block" src="/images/logo.png" /></div>
+        <div class="span4"></div>
+    </div>
+</div>
+
 <div class="container">
 
-    <div class="row">
-        <div class="col-sm-6">
-            <h2>Create litl.io Entry</h2>
-
-            <div>
-                <form class="form-horizontal" th:object="${litlioEntry}" th:action="@{/entry}" method="POST">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">URL to Shorten:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" th:field="*{LongURL}"/>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </div>
-                </form>
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <form id="urlForm" class="form-horizontal" th:object="${litlioEntry}" th:action="@{/create}" method="POST">
+            <div class="input-group">
+                <input id="urlValue" type="text"
+                        class="form-control" th:field="*{LongURL}"/>
+                <span class="input-group-btn">
+                    <button type="submit" if="submitURL" value="Submit"
+                            class="btn btn-md btn-primary">Shorten URL &raquo;</button>
+                </span>
             </div>
-
-        </div>
+        </form>
     </div>
 
-</div>
+</div> <!-- /container -->
+
+
+
+
+<nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <!-- Collection of nav links and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script th:src="@{/scripts/urlentry.js}" />
 
 </body>
 </html>

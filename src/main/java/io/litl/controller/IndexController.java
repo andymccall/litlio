@@ -35,7 +35,12 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(Model model) {
-        model.addAttribute("litlioEntry", new LitlioEntry());
+
+        LitlioEntry litlioEntry = new LitlioEntry();
+
+        litlioEntry.setLongURL("https://enter.your.long.url.here.com/");
+
+        model.addAttribute("litlioEntry", litlioEntry);
         return "index";
     }
 
