@@ -63,7 +63,15 @@ public class IndexController {
 
         litlioLogEntryService.addLitlioLogEntry(litlioLogEntry);
 
-        return "redirect:" + litlioEntry.getLongURL();
+        String redirectURL;
+
+        if (litlioEntry.getLongURL().indexOf("http") == -1) {
+            redirectURL = "http://" + litlioEntry.getLongURL();
+        } else {
+            redirectURL = litlioEntry.getLongURL();
+        }
+
+        return "redirect:" + redirectURL;
 
     }
 
