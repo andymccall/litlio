@@ -21,10 +21,10 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-            <a class="navbar-brand" href="http://litl.io/">Litl.io</a>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Login</a></li>
-            </ul>
+        <a class="navbar-brand" href="http://litl.io/">Litl.io</a>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Login</a></li>
+        </ul>
     </div><!-- /.container-fluid -->
 </nav>
 
@@ -40,16 +40,7 @@
 
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
-        <form id="urlForm" class="form-horizontal" th:object="${litlioEntry}" th:action="@{/create}" method="POST">
-            <div class="input-group">
-                <input id="urlValue" type="text"
-                        class="form-control" th:field="*{LongURL}"/>
-                <span class="input-group-btn">
-                    <button type="submit" if="submitURL" value="Submit"
-                            class="btn btn-md btn-primary">Shorten URL &raquo;</button>
-                </span>
-            </div>
-        </form>
+        <p>Ooops! We've logged the error and we'll take a look...</p>
     </div>
 
 </div> <!-- /container -->
