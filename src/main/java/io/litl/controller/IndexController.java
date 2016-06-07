@@ -52,7 +52,6 @@ public class IndexController {
         String timeStamp = simpleDateFormat.format(dateTime);
 
         LitlioEntry litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
-        System.out.println(litlioEntry.toString());
 
         LitlioLogEntry litlioLogEntry = new LitlioLogEntry();
         litlioLogEntry.setLitlioEntryId(litlioEntry.getId());

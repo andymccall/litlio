@@ -73,4 +73,11 @@ public class LitlioEntryServiceImpl implements LitlioEntryService {
         return litlioEntryDAO.listLitlioEntries();
     }
 
+    @Override
+    @Transactional
+    public Long getLitlioEntryCount() {
+        return litlioEntryDAO.getLitlioEntryCount();
+
+    }
+
 }

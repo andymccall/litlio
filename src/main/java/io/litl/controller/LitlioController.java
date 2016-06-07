@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 import java.util.List;
 
+import static io.litl.LitlioApplication.count;
+
 /**
  * Created by andym on 10/03/2016.
  * .ylutsV1OiW0
@@ -73,6 +75,13 @@ public class LitlioController {
     public String createLitlioEntry(LitlioEntry litlioEntry) {
 
         LitlioEntry savedLitlioEntry = litlioEntryService.addLitlioEntry(litlioEntry);
+
+        if (count.getCount() == null) {
+            count.setCount(litlioEntryService.getLitlioEntryCount());
+        } else {
+            count.incrementCount();
+        }
+
         return "redirect:/v/" + savedLitlioEntry.getShortURL();
 
     }

@@ -37,14 +37,17 @@ public class LitlioRESTController {
 
     @RequestMapping(value = "/count", method = RequestMethod.GET, produces="application/json")
     public @ResponseBody LitlioEntryCount getLitlioCount() {
+
+        if (count.getCount() == null) {
+            count.setCount(litlioEntryService.getLitlioEntryCount());
+        }
+
         return count;
     }
 
     @RequestMapping(value = "/v/{shortURL}", method = RequestMethod.GET, produces="application/json")
     public @ResponseBody
     LitlioEntry getLitlioEntry(@PathVariable String shortURL) {
-
-        System.out.println(shortURL);
 
         LitlioEntry litlioEntry;
         litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
@@ -64,6 +67,11 @@ public class LitlioRESTController {
 
         if (litlioEntry != null) {
             createdLitlioEntry = litlioEntryService.addLitlioEntry(litlioEntry);
+            if (count.getCount() == null) {
+                count.setCount(litlioEntryService.getLitlioEntryCount());
+            } else {
+                count.incrementCount();
+            }
         }
 
         // TODO: call persistence layer to update

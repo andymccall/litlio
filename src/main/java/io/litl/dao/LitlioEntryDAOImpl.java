@@ -2,10 +2,13 @@ package io.litl.dao;
 
 import io.litl.model.LitlioEntry;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import static io.litl.LitlioApplication.count;
 
 /**
  * Created by andym on 10/03/2016.
@@ -39,6 +42,12 @@ public class LitlioEntryDAOImpl extends AbstractDAO implements LitlioEntryDAO {
         litlioEntry = (LitlioEntry) criteria.uniqueResult();
 
         return litlioEntry;
+    }
+
+    public Long getLitlioEntryCount() {
+
+        return (Long) getSession().createCriteria(LitlioEntry.class).setProjection(Projections.rowCount()).uniqueResult();
+
     }
 
 

@@ -13,5 +13,6 @@ public interface LitlioEntryService {
     public LitlioEntry getLitlioEntryByID(int id);
     public LitlioEntry getLitlioEntryByShortURL(String shortURL);
     public List<LitlioEntry> listLitlioEntries();
+    public Long getLitlioEntryCount();
 
 }

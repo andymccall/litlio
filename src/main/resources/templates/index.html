@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>litl.io</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -14,14 +14,13 @@
     <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
             th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
 
+    <script th:src="@{/scripts/count.js}" />
 
 </head>
 <body>
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-            <a class="navbar-brand" href="http://litl.io/">Litl.io</a>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Login</a></li>
             </ul>
@@ -37,7 +36,6 @@
 </div>
 
 <div class="container">
-
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <form id="urlForm" class="form-horizontal" th:object="${litlioEntry}" th:action="@{/create}" method="POST">
@@ -51,8 +49,16 @@
             </div>
         </form>
     </div>
+</div>
 
-</div> <!-- /container -->
+<div class="container">
+        <div class="row">
+            <div class="span4"></div>
+            <div class="span4 text-center"><p><span id="count"></span> URLs shortened!</p></div>
+            <div class="span4"></div>
+        </div>
+</div>
+
 
 
 
