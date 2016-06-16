@@ -4,6 +4,7 @@ import io.litl.model.LitlioEntry;
 import io.litl.model.LitlioLogEntry;
 import io.litl.service.LitlioEntryService;
 import io.litl.service.LitlioLogEntryService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static io.litl.LitlioApplication.count;
 
 /**
  * Created by andym on 10/03/2016.
@@ -40,18 +45,23 @@ public class IndexController {
 
         litlioEntry.setLongURL("https://enter.your.long.url.here.com/");
 
+        if (count.getCount() == null) {
+            count.setCount(litlioEntryService.getLitlioEntryCount());
+        }
+
+        model.addAttribute("litlioCount", count);
         model.addAttribute("litlioEntry", litlioEntry);
         return "index";
     }
 
-    @RequestMapping("/{shortURL}")
-    public String getLitlioEntry(@PathVariable String shortURL, Model model, HttpServletRequest request) {
+    @RequestMapping("/{aliasURL}")
+    public String getLitlioEntry(@PathVariable String aliasURL, Model model, HttpServletRequest request) {
 
         Date dateTime = new Date();
         SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timeStamp = simpleDateFormat.format(dateTime);
 
-        LitlioEntry litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
+        LitlioEntry litlioEntry = litlioEntryService.getLitlioEntryByAliasURL(aliasURL);
 
         LitlioLogEntry litlioLogEntry = new LitlioLogEntry();
         litlioLogEntry.setLitlioEntryId(litlioEntry.getId());

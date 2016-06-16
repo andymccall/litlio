@@ -28,7 +28,12 @@ public class LitlioEntryServiceImpl implements LitlioEntryService {
     @Transactional
     public LitlioEntry addLitlioEntry(LitlioEntry litlioEntry) {
         if (litlioEntry != null) {
-            litlioEntry.setShortURL(createShortURL());
+            System.out.println("Here 2" + litlioEntry);
+            if (litlioEntry.getAliasURL() == null) {
+                litlioEntry.setAliasURL(createShortURL());
+            }
+
+            System.out.println("Here 3" + litlioEntry);
 
             litlioEntryDAO.addLitlioEntry(litlioEntry);
 
@@ -39,6 +44,7 @@ public class LitlioEntryServiceImpl implements LitlioEntryService {
         }
 
     }
+
 
     private String createShortURL() {
         String characterSet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -61,8 +67,8 @@ public class LitlioEntryServiceImpl implements LitlioEntryService {
 
     @Override
     @Transactional
-    public LitlioEntry getLitlioEntryByShortURL(String shortURL) {
-        return litlioEntryDAO.getLitlioEntryByShortURL(shortURL);
+    public LitlioEntry getLitlioEntryByAliasURL(String aliasURL) {
+        return litlioEntryDAO.getLitlioEntryByAliasURL(aliasURL);
 
     }
 

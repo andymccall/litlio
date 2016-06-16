@@ -7,60 +7,120 @@
     <link rel="shortcut icon" href="/templates/favicon.ico" type="image/x-icon"/>
     <link rel="icon" href="/templates/favicon.ico" type="image/x-icon"/>
 
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+
+    <script src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
           rel="stylesheet" media="screen"/>
 
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
-
-    <script th:src="@{/scripts/count.js}" />
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" media="all"/>
+    <script th:src="@{/scripts/count.js}"/>
+    <script th:src="@{/scripts/shorten.js}"/>
+    <script th:src="@{/scripts/create.js}"/>
 
 </head>
 <body>
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Login</a></li>
-            </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Login</a></li>
+        </ul>
     </div><!-- /.container-fluid -->
 </nav>
 
 <div class="container">
     <div class="row">
         <div class="span4"></div>
-        <div class="span4"><img class="center-block" src="/images/logo.png" /></div>
+        <div class="span4"><img class="center-block" src="/images/logo.png"/></div>
         <div class="span4"></div>
     </div>
 </div>
 
 <div class="container">
-    <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <form id="urlForm" class="form-horizontal" th:object="${litlioEntry}" th:action="@{/create}" method="POST">
-            <div class="input-group">
-                <input id="urlValue" type="text"
-                        class="form-control" th:field="*{LongURL}"/>
-                <span class="input-group-btn">
-                    <button type="submit" if="submitURL" value="Submit"
-                            class="btn btn-md btn-primary">Shorten URL &raquo;</button>
-                </span>
-            </div>
-        </form>
-    </div>
-</div>
 
-<div class="container">
-        <div class="row">
-            <div class="span4"></div>
-            <div class="span4 text-center"><p><span id="count"></span> URLs shortened!</p></div>
-            <div class="span4"></div>
+    <div class="panel with-nav-tabs panel-default">
+        <div class="panel-heading">
+            <ul class="nav nav-tabs" id="tabContainer">
+                <li class="active"><a href="#shortURLTab" data-toggle="tab">Short URL</a></li>
+                <li><a href="#memorableURLTab" data-toggle="tab">Memorable URL</a></li>
+            </ul>
         </div>
+        <div class="panel-body">
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="shortURLTab">
+
+                    <div class="row">
+                        <div class="col-md-10 col-xs-12">
+                            <input type="url" class="form-control" id="urlValue1"
+                                   value="https://enter.your.long.url.here.com/"/>
+                        </div>
+                        <div class="col-md-2 col-xs-12">
+                            <button onclick="shortenURL();return false" class="btn btn-primary">Shorten
+                                URL &raquo;</button>
+                        </div>
+
+                        <div class="row">
+                            <div class="span4 text-center">
+                                <p>
+                                <h1><span id="shortURL"></span></h1></p>
+                                <p><span id="shortURLpreview"></span></p>
+                                <p><span id="shortURLstats"></span></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="memorableURLTab">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-md-12 col-xs-12">
+                                <input type="url" class="form-control" id="urlValue2"
+                                       value="https://enter.your.long.url.here.com/"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h2>
+                                <small><label for="memorableWord" class="control-label col-xs-2">http://litl.io/</label>
+                                </small>
+                            </h2>
+                            <div class="col-md-8 col-xs-10">
+                                <input type="text" class="form-control" id="memorableWord" value="memorable-words"/>
+                            </div>
+                            <div class="col-md-2 col-xs-12">
+                                <button onclick="createURL();return false" class="btn btn-primary">Create
+                                    URL &raquo;</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="span4 text-center">
+                            <p>
+                            <h1><span id="memorableURL"></span></h1></p>
+                            <p><span id="memorableURLpreview"></span></p>
+                            <p><span id="memorableURLstats"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="span4 text-center"><span id="count" th:text="${litlioCount.count}"></span> URLs shortened!
+            </div>
+        </div>
+    </div>
+
 </div>
-
-
-
 
 
 <nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
@@ -79,7 +139,9 @@
     </div>
 </nav>
 
-<script th:src="@{/scripts/urlentry.js}" />
+<script th:src="@{/scripts/entryManager.js}"/>
+<script th:src="@{/scripts/tabManager.js}"/>
+
 
 </body>
 </html>

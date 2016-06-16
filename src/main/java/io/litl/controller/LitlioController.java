@@ -36,11 +36,11 @@ public class LitlioController {
         this.litlioLogEntryService = litlioLogEntryService;
     }
 
-    @RequestMapping({"/view/{shortURL]", "/v/{shortURL}"})
-    public String getLitlioEntry(@PathVariable String shortURL, Model model) {
+    @RequestMapping({"/view/{shortURL]", "/v/{aliasURL}"})
+    public String getLitlioEntry(@PathVariable String aliasURL, Model model) {
 
         LitlioEntry litlioEntry;
-        litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
+        litlioEntry = litlioEntryService.getLitlioEntryByAliasURL(aliasURL);
 
         List<LitlioLogEntry> litlioLogEntries;
         litlioLogEntries = litlioLogEntryService.listLitlioLogEntriesByID(litlioEntry.getId());
@@ -82,7 +82,7 @@ public class LitlioController {
             count.incrementCount();
         }
 
-        return "redirect:/v/" + savedLitlioEntry.getShortURL();
+        return "redirect:/v/" + savedLitlioEntry.getAliasURL();
 
     }
 }

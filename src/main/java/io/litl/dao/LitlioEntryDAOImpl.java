@@ -32,13 +32,13 @@ public class LitlioEntryDAOImpl extends AbstractDAO implements LitlioEntryDAO {
         return (List<LitlioEntry>) criteria.list();
     }
 
-    public LitlioEntry getLitlioEntryByShortURL(String shortURL) {
+    public LitlioEntry getLitlioEntryByAliasURL(String aliasURL) {
 
         LitlioEntry litlioEntry;
 
         // Grab the LitlioEntry
         Criteria criteria = getSession().createCriteria(LitlioEntry.class);
-        criteria.add(Restrictions.eq("shortURL",shortURL));
+        criteria.add(Restrictions.eq("aliasURL",aliasURL));
         litlioEntry = (LitlioEntry) criteria.uniqueResult();
 
         return litlioEntry;

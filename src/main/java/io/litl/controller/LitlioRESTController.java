@@ -45,12 +45,12 @@ public class LitlioRESTController {
         return count;
     }
 
-    @RequestMapping(value = "/v/{shortURL}", method = RequestMethod.GET, produces="application/json")
+    @RequestMapping(value = "/v/{aliasURL}", method = RequestMethod.GET, produces="application/json")
     public @ResponseBody
-    LitlioEntry getLitlioEntry(@PathVariable String shortURL) {
+    LitlioEntry getLitlioEntry(@PathVariable String aliasURL) {
 
         LitlioEntry litlioEntry;
-        litlioEntry = litlioEntryService.getLitlioEntryByShortURL(shortURL);
+        litlioEntry = litlioEntryService.getLitlioEntryByAliasURL(aliasURL);
 
         List<LitlioLogEntry> litlioLogEntries;
         litlioLogEntries = litlioLogEntryService.listLitlioLogEntriesByID(litlioEntry.getId());
@@ -64,6 +64,8 @@ public class LitlioRESTController {
     public ResponseEntity<LitlioEntry> update(@RequestBody LitlioEntry litlioEntry) {
 
         LitlioEntry createdLitlioEntry = new LitlioEntry();
+
+        System.out.println("Here 1" + litlioEntry);
 
         if (litlioEntry != null) {
             createdLitlioEntry = litlioEntryService.addLitlioEntry(litlioEntry);

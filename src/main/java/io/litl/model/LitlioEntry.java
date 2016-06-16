@@ -14,8 +14,8 @@ public class LitlioEntry {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "shortURL")
-    private String shortURL;
+    @Column(name = "aliasURL")
+    private String aliasURL;
 
     @Column(name = "longURL")
     private String longURL;
@@ -31,12 +31,12 @@ public class LitlioEntry {
         this.id = id;
     }
 
-    public String getShortURL() {
-        return shortURL;
+    public String getAliasURL() {
+        return aliasURL;
     }
 
-    public void setShortURL(String shortURL) {
-        this.shortURL = shortURL;
+    public void setAliasURL(String aliasURL) {
+        this.aliasURL = aliasURL;
     }
 
     public String getLongURL() {
@@ -54,7 +54,7 @@ public class LitlioEntry {
     @Override
     public String toString() {
         return getId() + ","
-                + getShortURL() + ","
+                + getAliasURL() + ","
                 + getLongURL();
 
     }
