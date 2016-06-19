@@ -18,12 +18,19 @@ function getMemorableURL(longURL, memorableWord) {
             var memorableURL = 'http://litl.io/'.concat(data.aliasURL);
             var memorableURLpreview  = 'Preview URL: http://litl.io/p/'.concat(data.aliasURL);
             var memorableURLstats  = 'Statistics URL: http://litl.io/s/'.concat(data.aliasURL);
+            var memorableURLcharacter = 'Your URL has been reduced by '.concat(data.characterReduction).concat(" characters");
             document.getElementById("memorableURL").textContent = memorableURL;
             document.getElementById("memorableURL").href = "http://litl.io/";
             document.getElementById("memorableURLpreview").textContent = memorableURLpreview;
             document.getElementById("memorableURLstats").textContent = memorableURLstats;
-
-        } else {
+            document.getElementById("memorableURLcharacter").textContent = memorableURLcharacter;
+        } else if (request.status == 409) {
+            document.getElementById("memorableURL").textContent = "Memorable word already used!";
+            document.getElementById("memorableURLpreview").textContent = "";
+            document.getElementById("memorableURLstats").textContent = "";
+            document.getElementById("memorableURLcharacter").textContent = "";
+            }
+        else {
             alert('Ooops, something went wrong...');
         }
     }

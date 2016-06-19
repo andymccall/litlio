@@ -1,80 +1,111 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Litl.io - Show Entry</title>
+    <title>litl.io</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="shortcut icon" href="/templates/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="/templates/favicon.ico" type="image/x-icon"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+
+    <script src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
 
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
           rel="stylesheet" media="screen"/>
 
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
-            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css" media="all"/>
+    <script th:src="@{/scripts/count.js}"/>
 
 </head>
 <body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Login</a></li>
+        </ul>
+    </div><!-- /.container-fluid -->
+</nav>
+
 <div class="container">
 
-    <div class="row">
-        <div class="col-sm-6">
-            <h2>Litl.io Entry</h2>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title" th:text="'http://litl.io/' + ${litlioEntry.aliasURL}"></h3>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-8">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">LitlioEntry Id :</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${litlioEntry.id}">LitlioEntry Id</p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Short URL :</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static">
-                            <a th:text="'http://litl.io/' + ${litlioEntry.ShortURL}" th:href="@{~/} + @{${litlioEntry.ShortURL}}">ShortURL</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Long URL :</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static">
-                            <a th:text="${litlioEntry.LongURL}" th:href="@{${litlioEntry.LongURL}}">LongURL</a>
-                        </p>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 sm-2 control-label">Hit Count :</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${litlioEntry.HitCount}">Hit Count</p>
-                    </div>
-                </div>
-                <div class="container">
-                    <div th:if="${not #lists.isEmpty(litlioLogEntries)}">
-                        <h2>Logs</h2>
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Time</th>
-                                <th>IP Address</th>
-                                <th>UserAgent</th>
-                                <th>Referer</th>
-                            </tr>
-                            <tr th:each="litlioLogEntry : ${litlioLogEntries}">
-                                <td th:text="${litlioLogEntry.Timestamp}"></td>
-                                <td th:text="${litlioLogEntry.ipAddress}"></td>
-                                <td th:text="${litlioLogEntry.userAgent}"></td>
-                                <td th:text="${litlioLogEntry.referer}"></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+        <div class="panel-body">
 
-            </form>
+            <div class="row">
+                <div class="col-sm-8">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Alias URL :</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">
+                                    <a th:text="'http://litl.io/' + ${litlioEntry.aliasURL}"
+                                       th:href="@{~/} + @{${litlioEntry.aliasURL}}">Alias URL</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Long URL :</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static">
+                                    <a th:text="${litlioEntry.LongURL}" th:href="@{${litlioEntry.LongURL}}">Long URL</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 sm-2 control-label">Hit Count :</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" th:text="${litlioEntry.HitCount}">Hit Count</p>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div th:if="${not #lists.isEmpty(litlioLogEntries)}">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>IP Address</th>
+                                        <th>UserAgent</th>
+                                        <th>Referer</th>
+                                    </tr>
+                                    <tr th:each="litlioLogEntry : ${litlioLogEntries}">
+                                        <td th:text="${litlioLogEntry.Timestamp}"></td>
+                                        <td th:text="${litlioLogEntry.ipAddress}"></td>
+                                        <td th:text="${litlioLogEntry.userAgent}"></td>
+                                        <td th:text="${litlioLogEntry.referer}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <!-- Collection of nav links and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 </body>
 </html>

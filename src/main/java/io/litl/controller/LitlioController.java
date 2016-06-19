@@ -36,7 +36,7 @@ public class LitlioController {
         this.litlioLogEntryService = litlioLogEntryService;
     }
 
-    @RequestMapping({"/view/{shortURL]", "/v/{aliasURL}"})
+    @RequestMapping({"/view/{aliasURL}", "/v/{aliasURL}"})
     public String getLitlioEntry(@PathVariable String aliasURL, Model model) {
 
         LitlioEntry litlioEntry;

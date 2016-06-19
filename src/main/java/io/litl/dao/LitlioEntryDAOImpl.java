@@ -50,5 +50,13 @@ public class LitlioEntryDAOImpl extends AbstractDAO implements LitlioEntryDAO {
 
     }
 
+    public Boolean ifExists(String aliasURL) {
+
+        return getSession().createCriteria(LitlioEntry.class)
+                .add(Restrictions.eq("aliasURL", aliasURL))
+                .setProjection(Projections.property("aliasURL"))
+                .uniqueResult() != null;
+    }
+
 
 }

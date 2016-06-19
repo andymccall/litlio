@@ -54,6 +54,23 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping(value = {"/robots", "/robot", "/robot.txt", "/robots.txt"})
+    public void robot(HttpServletResponse response) {
+
+        InputStream resourceAsStream = null;
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            resourceAsStream = classLoader.getResourceAsStream("static/robots.txt");
+
+            response.addHeader("Content-disposition", "filename=robots.txt");
+            response.setContentType("text/plain");
+            IOUtils.copy(resourceAsStream, response.getOutputStream());
+            response.flushBuffer();
+        } catch (Exception e) {
+            System.out.println("Problem with displaying robots.txt");
+        }
+    }
+
     @RequestMapping("/{aliasURL}")
     public String getLitlioEntry(@PathVariable String aliasURL, Model model, HttpServletRequest request) {
 

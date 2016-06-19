@@ -65,18 +65,18 @@ public class LitlioRESTController {
 
         LitlioEntry createdLitlioEntry = new LitlioEntry();
 
-        System.out.println("Here 1" + litlioEntry);
-
         if (litlioEntry != null) {
-            createdLitlioEntry = litlioEntryService.addLitlioEntry(litlioEntry);
-            if (count.getCount() == null) {
-                count.setCount(litlioEntryService.getLitlioEntryCount());
-            } else {
-                count.incrementCount();
-            }
+            if (!litlioEntryService.ifExists(litlioEntry.getAliasURL())) {
+                createdLitlioEntry = litlioEntryService.addLitlioEntry(litlioEntry);
+                if (count.getCount() == null) {
+                    count.setCount(litlioEntryService.getLitlioEntryCount());
+                } else {
+                    count.incrementCount();
+                }
+            } else
+                return new ResponseEntity<LitlioEntry>(createdLitlioEntry, HttpStatus.CONFLICT);
         }
 
-        // TODO: call persistence layer to update
         return new ResponseEntity<LitlioEntry>(createdLitlioEntry, HttpStatus.OK);
     }
 
